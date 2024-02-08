@@ -10,33 +10,33 @@ router.get('/getdata', function(req, res)
     gameModel.find().then(function(games)
     {
         res.json({games});
-    })
+    }).catch(function(err){
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error'});
+    });
+});
 
-    //var gamedata = gameModel.find({});
-    //res.json(gamedata);
-})
-
-router.post('/deletegame', function(req,res){
+router.post('/deletegame', function(req,res)
+{
     console.log(req.body);
     gameModel.findByIdAndDelete(req.body.game._id).exec();
     res.redirect('games.html');
 })
 
-router.post('/updategame', function(req,res){
-    gameModel.findByIdAndUpdate(
-        req.body.id,
-        {gamename:req.body.game}).
-        then(
+router.post('/updategame', function(req,res)
+{
+    gameModel.findByIdAndUpdate(req.body.id, {gamename:req.body.game}).then(
             function()
             {
                 res.redirect('games.html');
-            }    
-            );
+            });
 });
 
-router.post('/saveGame', function(req,res){
+router.post('/saveGame', function(req,res)
+{
     console.log(req.body);
-    new gameModel(req.body).save().then(function(){
+    new gameModel(req.body).save().then(function()
+    {
         res.redirect('games.html');
     })
 });
