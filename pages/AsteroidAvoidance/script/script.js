@@ -288,6 +288,15 @@ gameStates[1] = function(){
 gameStates[2] = function(){
     highScoreElements.style.display = "block";
     document.getElementById("scoreHolder").value = score;
+    fetch("/getScores").then(function(scores){
+        scores.json().then(function(theScores){
+            for(var i = 0; i < 3; i++)
+            {
+                var temp = "<li>" + theScores[i].score.toString + "</li>"
+                document.getElementById("highScores").innerHTML += temp;
+            }
+        })
+    })
     if(score > highScore){
         highScore = score;
         ctx.save();

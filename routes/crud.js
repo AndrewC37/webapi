@@ -18,6 +18,13 @@ router.get('/getdata', function(req, res)
     });
 });
 
+router.get('/getScores', function(req,res){
+    res = playerModel.find();
+    cursor.sort({score: -1});
+    
+});
+
+
 router.post('/deletegame', function(req,res)
 {
     console.log(req.body);
@@ -50,6 +57,7 @@ router.post('/saveScore', function(req,res)
         console.log(req.body);
         res.redirect('/index');
     })
+    
 })
 
 router.post('/unity', function(req,res)
