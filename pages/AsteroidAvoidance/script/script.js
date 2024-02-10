@@ -14,8 +14,8 @@ var bgMain = new Image();
 var cookieSprite = new Image();
 var highScoreElements = document.querySelector('.highscore');
 
-bgMain.src = "images/rocks.jpg";
-cookieSprite.src = "images/cookie.png";
+bgMain.src = "rocks.jpg";
+cookieSprite.src = "cookie.png";
 
 //event listener to trigger main when image is loaded
 bgMain.onload = function(){
@@ -164,7 +164,7 @@ function keyPressUp(e){
 }
 
 function keyPressDown(e){
-    //console.log("Key pressed " + e.keyCode);
+    console.log("Key pressed " + e.keyCode);
     if(gameOver == false){
         if(e.keyCode === 38){
             ship.up = true;
@@ -287,6 +287,7 @@ gameStates[1] = function(){
 //---Game Over Screen---
 gameStates[2] = function(){
     highScoreElements.style.display = "block";
+    document.getElementById("scoreHolder").value = score;
     if(score > highScore){
         highScore = score;
         ctx.save();
@@ -299,6 +300,7 @@ gameStates[2] = function(){
         ctx.font = "15px Arial";
         ctx.fillText("Press Enter to Start", c.width/2, c.height/2 + 20);
         ctx.restore();
+        
 
     }
     else{

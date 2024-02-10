@@ -5,10 +5,11 @@ var dataToSend;
 
 require('../models/GameData')
 var gameModel = mongoose.model("games");
+var playerModel = mongoose.model("playerData");
 
 router.get('/getdata', function(req, res)
 {
-    gameModel.find().then(function(games)
+    gameModel.find({}).then(function(games)
     {
         res.json({games});
     }).catch(function(err){
@@ -41,6 +42,15 @@ router.post('/saveGame', function(req,res)
         res.redirect('games.html');
     })
 });
+
+
+router.post('/saveScore', function(req,res)
+{
+    new playerModel(req.body).save().then(function(){
+        console.log(req.body);
+        res.redirect('/index');
+    })
+})
 
 router.post('/unity', function(req,res)
 {

@@ -6,4 +6,11 @@ var gameData = new Schema({
     gamestudio:String
 });
 
+var playerScore = new Schema({
+    score:String,
+    username:String
+})
+
 mongoose.model('games', gameData);
+
+mongoose.model('playerData', playerScore);

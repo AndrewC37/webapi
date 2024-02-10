@@ -3,12 +3,13 @@ var app = express();
 var router = express.Router();
 var path = require('path');
 var mongoose = require('mongoose');
-var bodyparser = require('body-parser');
+var bodyparser = require("body-parser");
 var crud = require('./routes/crud');
+const exp = require('constants');
 
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended:true}));
-app.use(bodyparser.json);
+app.use(bodyparser.json());
 app.use('/', crud);
 
 //connect to mongo db via mongoose
@@ -28,8 +29,12 @@ mongoose.connect("mongodb://localhost:27017/WebAPI"
 //load static folder, to get the image
 app.use(express.static(__dirname+'/pages'))
 
+app.use(express.static(__dirname + '/pages/AsteroidAvoidance/images'))
 
-app.get('/index', function(req, res){
+app.use(express.static(__dirname + '/pages/AsteroidAvoidance/script'))
+
+
+app.get('/', function(req, res){
     //res.send("here would be the page from the route");
     res.sendFile(path.join(__dirname+"/pages/index.html"))
 })
@@ -52,6 +57,11 @@ app.get('/update', function(req,res){
     //res.send("here would be the page from the route");
     res.sendFile(path.join(__dirname+"/pages/update.html"));
 });
+
+app.get('/index', function(req,res){
+    res.sendFile(path.join(__dirname + "/pages/AsteroidAvoidance/pages/index.html"));
+});
+
 
 app.listen(3000, function(){
     console.log("Running on port 3000");
