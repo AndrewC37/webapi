@@ -20,6 +20,16 @@
                         var unityElement = document.createElement('p');
                         unityElement.innerHTML = "Player: " + unityGameData.name + ", High Score: " + unityGameData.level;
                         document.getElementById('container').appendChild(unityElement);
+
+                        var updateButton = document.createElement('button');
+                        updateButton.innerText = 'Update Entry';
+                        updateButton.addEventListener('click', function()
+                        {
+                            window.location.replace('editPlayerData.html?id=' + unityGameData._id + '&name=' + unityGameData.name + '&timeElapsed=' + unityGameData.timeElapsed + '&level=' + unityGameData.level);
+                        });
+                        unityElement.appendChild(updateButton);
+
+
                     }
                 })
             })

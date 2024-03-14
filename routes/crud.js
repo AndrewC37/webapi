@@ -81,16 +81,28 @@ router.post('/unity', function(req,res)
     })
 })
 
-router.post('deleteUnity', function(req,res)
+router.post('/deleteUnity', function(req,res)
 {
  console.log("Deleting item");
  unityModel.findByIdAndDelete(req.body._id).exec();
 })
 
-router.post('updateUnity', function(req,res)
+router.post('/updateUnity', function(req,res)
 {
  console.log("Updating item");
- unityModel.findByIdAndUpdate(req.body._id).exec();
+ console.log(req.body._id);
+ unityModel.findByIdAndUpdate(req.body._id, {name:req.body.name, level:req.body.level}).exec().then(
+    function()
+    {
+        res.redirect('highScores.html');
+    });
+})
+
+router.post('/updateUnityGame', function(req,res)
+{
+ console.log("Updating item");
+ console.log(req.body.id);
+ unityModel.findByIdAndUpdate(req.body.id, {name:req.body.name, level:req.body.level, elapsedTime:req.body.elapsedTime}).exec();
 })
 
 //sorts by high score (level)

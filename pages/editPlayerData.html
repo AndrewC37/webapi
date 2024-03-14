@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Player Data</title>
+</head>
+<body>
+    <h1>Edit Player Data</h1>
+    <form action="/updateUnity" method="POST">
+        <br>
+        <input type="text" name="_id" id="id" value="" hidden>
+        <input type="text" name="name" id="name" value=""><br>
+        <input type="text" name="timeElapsed" id="timeElapsed" value="" hidden>
+        <input type="text" name="level" id="level" value="">
+        <br>
+        <input type="submit" value="Update Player Data">
+    </form>
+    <script>
+        var queryData = window.location.search;
+        console.log(queryData);
+        var entries = new URLSearchParams(queryData);
+        document.getElementById("id").value = entries.get("id");
+        document.getElementById("name").value = entries.get("name");
+        document.getElementById("timeElapsed").value = entries.get("timeElapsed");
+        document.getElementById("level").value = entries.get("level");
+    </script>
+</body>
+</html>
