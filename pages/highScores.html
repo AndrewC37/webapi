@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Page</title>
+</head>
+<body>
+    <div id="container">
+        <h1>High Scores List</h1>
+        <p id="thingy"></p>
+        <script>
+            fetch("/getUnity").then(function(unitygames)
+            {
+                unitygames.json().then(function(theUnity)
+                {
+                    console.log(theUnity);
+                    for(let unityGameData of theUnity.playerdata)
+                    {
+                        var unityElement = document.createElement('p');
+                        unityElement.innerHTML = "Player: " + unityGameData.name + ", High Score: " + unityGameData.level;
+                        document.getElementById('container').appendChild(unityElement);
+                    }
+                })
+            })
+        </script>
+    </div>
+</body>
+</html>
